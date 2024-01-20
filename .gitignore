@@ -10,6 +10,7 @@ webaudioapi.js
 devices/*
 fx/*
 
+.idea
 
 # Logs
 logs

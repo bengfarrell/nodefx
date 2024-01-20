@@ -1,3 +1,16 @@
+index.d.ts
+index.d.ts.map
+index.js
+wapi-browser.d.ts
+wapi-browser.d.ts.map
+wapi-browser.js
+webaudioapi.d.ts
+webaudioapi.d.ts.map
+webaudioapi.js
+devices/*
+fx/*
+
+
 # Logs
 logs
 *.log

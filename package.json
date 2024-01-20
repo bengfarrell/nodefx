@@ -1,0 +1,22 @@
+{
+  "name": "nodefx",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "./node_modules/.bin/tsc",
+    "build:watch": "./node_modules/.bin/tsc --watch",
+    "demo-node": "node demos/mic-delay.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bengfarrell/nodefx.git"
+  },
+  "dependencies": {
+    "node-web-audio-api": "^0.15.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  }
+}

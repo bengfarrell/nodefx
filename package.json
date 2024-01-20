@@ -9,6 +9,14 @@
     "build:watch": "./node_modules/.bin/tsc --watch",
     "demo-node": "node demos/mic-delay.js"
   },
+  "files": [
+    "/index.*",
+    "/wapi-browser.*",
+    "/webaudioapi.*",
+    "/eventlistener.*",
+    "/devices",
+    "/fx"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/bengfarrell/nodefx.git"

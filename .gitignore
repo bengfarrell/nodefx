@@ -8,6 +8,7 @@ webaudioapi.d.ts
 webaudioapi.d.ts.map
 webaudioapi.js
 devices/*
+library/*
 fx/*
 
 .idea

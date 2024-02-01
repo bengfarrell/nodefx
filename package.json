@@ -7,7 +7,8 @@
   "scripts": {
     "build": "./node_modules/.bin/tsc",
     "build:watch": "./node_modules/.bin/tsc --watch",
-    "demo-node": "node demos/mic-delay.js"
+    "ui-demo:browser": "http-server ./ -o ./demos",
+    "ui-demo:node": "node ./demos/ui/socket-server.js & http-server ./ -o ./demos"
   },
   "files": [
     "/index.*",
@@ -15,6 +16,7 @@
     "/webaudioapi.*",
     "/eventlistener.*",
     "/devices",
+    "/library",
     "/fx"
   ],
   "repository": {
@@ -25,6 +27,8 @@
     "node-web-audio-api": "^0.15.0"
   },
   "devDependencies": {
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "ws": "^8.5.1",
+    "http-server": "^14.1.1"
   }
 }

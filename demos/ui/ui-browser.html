@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NODEFX Browser Based Demos</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="fx-menu-container"></div>
+    <div id="fx-controls-container"></div>
+    <script type="importmap">
+        {
+          "imports": {
+            "node-web-audio-api": "../../wapi-browser.js",
+            "socket-comms": "./dummysocket.js"
+          }
+        }
+    </script>
+    <script type="module" src="./ui.js"></script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 import { DelayNode, GainNode, BiquadFilterNode } from '../webaudioapi.js';
-import { BaseEffect, BaseEffectOptions } from './baseeffect.js';
+import { AbstractEffect, AbstractEffectOptions } from './abstracteffect.js';
 
-export interface DelayOptions extends BaseEffectOptions {
+export interface DelayOptions extends AbstractEffectOptions {
     delayTime?: number;
     feedback?: number;
     wetLevel?: number;
@@ -9,99 +9,94 @@ export interface DelayOptions extends BaseEffectOptions {
     cutoff?: number;
 }
 
-export class Delay extends BaseEffect {
-    static parameters = [
-        ...super.parameters,
-        'delayTime',
-        'feedback',
-        'wetLevel',
-        'dryLevel',
-        'cutOff'
-    ]
-
+export class Delay extends AbstractEffect {
     static DelayTime = {
-        value: 1,
+        default: 1,
         min: .2,
         max: 10,
         type: 'float'
     }
 
     static Feedback = {
-        value: 0.45,
+        default: 0.45,
         min: 0,
         max: 0.9,
         type: 'float'
     }
 
     static Cutoff=  {
-        value: 20000,
+        default: 20000,
         min: 20,
         max: 20000,
         type: 'float'
     }
 
     static WetLevel = {
-        value: 0.5,
+        default: 0.5,
         min: 0,
         max: 1,
         type: 'float'
     }
 
     static DryLevel= {
-        value: 1,
+        default: 1,
         min: 0,
         max: 1,
         type: 'float'
     }
 
-    protected _delayTime: number;
+    static parameters = {
+        ...super.parameters,
+        delayTime: Delay.DelayTime,
+        feedback: Delay.Feedback,
+        wetLevel: Delay.WetLevel,
+        dryLevel: Delay.DryLevel,
+        cutOff: Delay.Cutoff
+    }
+
     set delayTime(value) {
-        this._delayTime = value;
+        this.parameterValues.set('delayTime', value);
         this.delayNode.delayTime.value = value;
     }
 
     get delayTime() {
-        return this._delayTime;
+        return this.parameterValues.get('delayTime');
     }
 
-    protected _feedback: number;
     set feedback(value: number) {
-        this._feedback = value;
+        this.parameterValues.set('feedback', value);
         this.feedbackNode.gain.setTargetAtTime(value, this.audioContext.currentTime, 0.01);
     }
 
     get feedback() {
-        return this._feedback;
+        return this.parameterValues.get('feedback');
     }
 
-    protected _wetLevel: number;
     set wetLevel(value) {
-        this._wetLevel = value;
-        this.wetNode.gain.setTargetAtTime(this._wetLevel, this.audioContext.currentTime, 0.01);
+        this.parameterValues.set('wetLevel', value);
+        this.wetNode.gain.setTargetAtTime(value, this.audioContext.currentTime, 0.01);
     }
 
     get wetLevel() {
-        return this._wetLevel;
+        return this.parameterValues.get('wetLevel');
     }
 
-    protected _dryLevel: number;
     set dryLevel(value) {
-        this._dryLevel = value;
-        this.dryNode.gain.setTargetAtTime(this._dryLevel, this.audioContext.currentTime, 0.01);
+        this.parameterValues.set('dryLevel', value);
+        this.dryNode.gain.setTargetAtTime(value, this.audioContext.currentTime, 0.01);
     }
 
     get dryLevel() {
-        return this._dryLevel;
+        return this.parameterValues.get('dryLevel');
     }
 
-    protected _cutOff: number;
     set cutOff(value) {
-        this._cutOff = value;
-        this.filterNode.frequency.setTargetAtTime(this._cutOff, this.audioContext.currentTime, 0.01);
+        this.parameterValues.set('cutOff', value);
+        this.filterNode.frequency.setTargetAtTime(value, this.audioContext.currentTime, 0.01);
     }
 
     get cutOff() {
-        return this._cutOff;
+        return this.parameterValues.get('cutOff');
     }
 
     protected dryNode: GainNode;
@@ -127,20 +122,11 @@ export class Delay extends BaseEffect {
         this.wetNode.connect(this.outputNode);
         this.dryNode.connect(this.outputNode);
 
-        this._delayTime = options?.delayTime || Delay.DelayTime.value;
-        this.delayTime = this._delayTime;
-
-        this._feedback = options?.feedback || Delay.Feedback.value;
-        this.feedback = this._feedback;
-
-        this._wetLevel = options?.wetLevel || Delay.WetLevel.value;
-        this.wetLevel = this._wetLevel;
-
-        this._dryLevel = options?.dryLevel || Delay.DryLevel.value;
-        this.dryLevel = this._dryLevel;
-
-        this._cutOff = options?.cutoff || Delay.Cutoff.value;
-        this.cutOff = this._cutOff;
+        this.delayTime = options?.delayTime || Delay.DelayTime.default;
+        this.feedback = options?.feedback || Delay.Feedback.default;
+        this.wetLevel = options?.wetLevel || Delay.WetLevel.default;
+        this.dryLevel = options?.dryLevel || Delay.DryLevel.default;
+        this.cutOff = options?.cutoff || Delay.Cutoff.default;
 
         this.filterNode.type = 'lowpass';
     }

@@ -2,16 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Demos</title>
 </head>
 <body>
-    <script type="importmap">
-        {
-          "imports": {
-            "node-web-audio-api": "../wapi-browser.js"
-          }
-        }
-    </script>
-    <script type="module" src="mic-delay.js"></script>
+    <h1>Browser based Microphone FX manager</h1>
+    <p>
+        An easy way to try effects with microphone input is to run entirely in your
+        browser using the Web Audio API.
+    </p>
+    <p>
+        This fakes a web socket connection to a server, so it shares the same code as
+        the node version, but runs in the browser.
+    </p>
+    <p>
+        <a href="./ui/ui-browser.html">Try it out</a>
+    </p>
+
+    <h1>Node based Microphone FX manager</h1>
+    <p>
+        The same UI as above, but establishes a real web socket connection to a Node and node will
+        create the microphone input and apply the effects all in Node using the "node-web-audio-api".
+    </p>
+    <p>
+        <a href="./ui/ui-node.html">Try it out</a>
+    </p>
 </body>
 </html>
